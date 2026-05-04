@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vale dos Pinheiros</title>
+    <link rel="stylesheet" href="style.css">
+
+
+<script
+src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script
+src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="overlay">
+      <h1>Vale dos Pinheiros</h1>
+      <p>Tigipió - SC - Chalé para até 4 pessoas</p>
+      <a href="#reserva" class="btn">Resevar agora</a>
+    </div>
+  </header>
+
+  <section class="container">
+    <h2>Escolha suas datas</h2>
+
+    <form id="form">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome" required>
+
+      <label for="entrada">Data de entrada</label>
+      <input type="date" id="entrada" required>
+
+      <label for="saida">Data de saída</label>
+      <input type="date" id="saida" required>
+    </form>
+
+    <h3>Datas Disponíveis</h3>
+    <ul id="Lista"></ul>
+  </section>
+
+  <a href="login.html" class="admin-link">Admin</a>
+
+  <script src="firebase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="center">
+
+  <div class="card">
+    <h2>Login Admin</h2>
+    <input type="password" id="senha"
+    placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+  </div>
+
+  <script>
+    function login() {
+      const senha = document.getElementById('senha').value;
+      if (senha === '1234') {
+        window.location.href = 'admin.html';
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>Admin</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script
+  src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script
+  src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+  <body>
+
+    <h1>Painel de Reservas</h1>
+    <ul id="adminlista"></ul>
+
+    <script src="firebase.js"></script>
+
+    <script>
+      const lista =
+      document.getElementById('adminlista');
+
+      async function carregar() {
+        lista.innerHTML = '';
+        const snapshot = await db.collection('reservas').get();
+        snapshot.forEach(doc => {
+          const r = doc.data();
+          const li = document.createElement('li');
+          li.innerHTML = `${r.nome} - ${r.entrada} até ${r.saida}`;
+          li.innerHTML = `<button onclick="remover('${doc.id}')">Excluir</button>`;
+          lista.appendChild(li);
+        });
+      }
+      async function remover(id) {
+        await db.collection('reservas').doc(id).delete();
+        carregar();
+      }
+      carregar();
+    </script>
+
+
+  </body>
+  </html>

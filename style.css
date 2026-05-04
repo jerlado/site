@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f1ea;
+    
+}
+
+.hero {
+    height: 80vh;
+    display: flex;
+    background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+.btn {
+    background: #6b8e6b;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.container {
+    padding: 40px;
+    text-align: center;
+}
+
+input, button {
+    padding: 12px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+button {
+    background: #2f4f2f;
+    color: white;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.admin-link {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
